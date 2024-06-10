@@ -61,7 +61,7 @@ bg_x1 = 0
 bg_x2 = background_width
 
 # Coordenadas iniciais do personagem
-ivo_x = 66 
+ivo_x = 2
 ivo_y = ivo_height
 
 # Velocidade do movimento do fundo
