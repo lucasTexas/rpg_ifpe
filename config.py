@@ -19,51 +19,42 @@ background = pygame.image.load("cenario_rpg.jpeg").convert()
 background_width = background.get_width()
 background_height = background.get_height()
 
-# Carregar personagem
-ivo = pygame.image.load("mini_ivo_parado.png").convert_alpha()
-ivo_width = ivo.get_width()
-ivo_height = ivo.get_height()
 
-ivo_andando_1 = pygame.image.load("mini_ivo_andando1.png").convert_alpha()
-ivo_andando_1_width = ivo.get_width()
-ivo_andando_1_height = ivo.get_height()
-
-ivo_andando_2 = pygame.image.load("mini_ivo_andando2.png").convert_alpha()
-ivo_andando_2_width = ivo.get_width()
-ivo_andando_2_height = ivo.get_height()
-
-ivo_andando_3 = pygame.image.load("mini_ivo_andando3.png").convert_alpha()
-ivo_andando_3_width = ivo.get_width()
-ivo_andando_3_height = ivo.get_height()
-
-ivo_andando_4 = pygame.image.load("mini_ivo_andando4.png").convert_alpha()
-ivo_andando_4_width = ivo.get_width()
-ivo_andando_4_height = ivo.get_height()
-
-ivo_andando_5 = pygame.image.load("mini_ivo_andando5.png").convert_alpha()
-ivo_andando_5_width = ivo.get_width()
-ivo_andando_5_height = ivo.get_height()
-
-ivo_andando_6 = pygame.image.load("mini_ivo_andando6.png").convert_alpha()
-ivo_andando_6_width = ivo.get_width()
-ivo_andando_6_height = ivo.get_height()
-
-ivo_andando_7 = pygame.image.load("mini_ivo_andando7.png").convert_alpha()
-ivo_andando_7_width = ivo.get_width()
-ivo_andando_7_height = ivo.get_height()
-
-ivo_andando_8 = pygame.image.load("mini_ivo_andando8.png").convert_alpha()
-ivo_andando_8_width = ivo.get_width()
-ivo_andando_8_height = ivo.get_height()
 
 # Coordenadas iniciais do fundo
 bg_x1 = 0
 bg_x2 = background_width
 
-# Coordenadas iniciais do personagem
-ivo_x = 2
-ivo_y = ivo_height
 
 # Velocidade do movimento do fundo
 scroll_speed = 2
 ivo_speed = 2
+
+#if tela == "primeira":
+ #   # Desenhar tela inicial
+  #  config.screen.blit(config.tela_inicial, (0, 0))
+   # font = pygame.font.Font(None, 36)
+    #pressione_enter = font.render("Press ENTER to start", True, (255, 255, 255))
+    #config.screen.blit(pressione_enter, (200, 200))
+    #keys = pygame.key.get_pressed()
+    #if keys[pygame.K_RETURN]:
+#        desvanecer_tela()
+ #       tela = "segunda"
+  #          
+#if tela == "segunda":
+#	todas_as_sprites.draw(config.screen)
+ #   todas_as_sprites.update()
+#
+#    # Reposicionando o fundo
+#    if config.bg_x1 <= -config.background_width:
+#        bg_x1 = config.background_width
+ #   if config.bg_x2 <= -config.background_width:
+  #      bg_x2 = config.background_width
+#
+ #   # Desenhar o fundo
+  #  config.screen.blit(config.background, (config.bg_x1, 0))
+   # config.screen.blit(config.background, (config.bg_x2, 0))
+  #  # Desenhar o personagem
+   # config.screen.blit(config.ivo, (200, 200))
+
+ #   keys = pygame.key.get_pressed()
