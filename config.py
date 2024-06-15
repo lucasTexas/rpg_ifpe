@@ -17,13 +17,33 @@ tela_inicial_height = tela_inicial.get_height()
 # Carregar a imagem de fundo
 background = pygame.image.load("cenario_rpg.jpeg").convert()
 background_width = background.get_width()
+background_largura = background.get_width()
 background_height = background.get_height()
+
+maker = pygame.image.load("IFMAKER.png").convert()
+maker_width = maker.get_width()
+maker_height = maker.get_height()
+
+dacal = pygame.image.load("SALA_DE_DACAL.png").convert()
+dacal_width = maker.get_width()
+dacal_height = maker.get_height()
+
+sala = pygame.image.load("SALA_DE_AULA.png").convert()
+sala_width = maker.get_width()
+sala_height = maker.get_height()
+
+alea = pygame.image.load("imagem_aleatoria.jpg").convert()
+alea_width = alea.get_width()
+alea_height = alea.get_height()
+alea_x = 100
+
 
 
 
 # Coordenadas iniciais do fundo
 bg_x1 = 0
 bg_x2 = background_width
+bg_x3 = bg_x2 + background_width
 
 
 # Velocidade do movimento do fundo
