@@ -1,8 +1,24 @@
 import pygame
 import config
+import time
+import textwrap
+import textos
 
 # Inicializando o Pygame
 pygame.init()
+
+def escrever_texto(texto, x, y, largura, altura):
+    pygame.draw.rect(config.screen, (0, 0, 0), (x, y, largura, altura))
+
+    lines = textwrap.wrap(texto, int(largura / 9))
+    y_texto = y + 20  # Starting y position for text (20 pixels down from top of dialog box)
+    font = pygame.font.Font(None, 20)
+
+    for line in lines:
+        text_surface = font.render(line, True, (255, 255, 255))
+        config.screen.blit(text_surface, (x + 10, y_texto))
+        y_texto += 30  # Adjust spacing between lines
+
 
 def desvanecer_tela():
     superficie = pygame.Surface((800, 600))
@@ -17,6 +33,7 @@ def desvanecer_tela():
 class Cenarios:
     def __init__(self):
         self.ivo = Ivo()
+        self.marlon = Marlon()
         self.todas_as_sprites = pygame.sprite.Group()
         self.todas_as_sprites.add(self.ivo)
         self.parametro_tela = "inicial"
@@ -31,16 +48,25 @@ class Cenarios:
             self.keys = pygame.key.get_pressed()
             if self.keys[pygame.K_RETURN]:
                 desvanecer_tela()
+                self.parametro_tela = "abertura"
+                pygame.display.flip()
+
+        elif self.parametro_tela == "abertura":
+            superficie = pygame.Surface((600, 400))
+            superficie.fill((0, 0, 0))
+            escrever_texto(textos.texto_abertura, 0, 0, 600, 400)
+            self.keys = pygame.key.get_pressed()
+            if self.keys[pygame.K_RIGHT]:
+                desvanecer_tela()
                 self.parametro_tela = "principal"
                 pygame.display.flip()
-            #return 0
 
         elif self.parametro_tela == "principal":
-            config.alea = pygame.transform.scale(config.alea, (config.alea_width*0.01, config.alea_height*0.01))
+            #config.alea = pygame.transform.scale(config.alea, (config.alea_width*0.01, config.alea_height*0.01))
             config.screen.blit(config.background, (config.bg_x1, 0))
             config.screen.blit(config.background, (config.bg_x2, 0))
             config.screen.blit(config.background, (config.bg_x3, 0))
-            config.screen.blit(config.alea, (config.alea_x, 100))
+            #config.screen.blit(config.alea, (config.alea_x, 100))
             
             
 
@@ -55,9 +81,11 @@ class Cenarios:
                 self.contador_cenarios = 2
             elif self.ivo.rect_x == config.background_largura and self.contador_cenarios == 2:
                 self.contador_cenarios = 3
+            elif self.ivo.rect_x == config.background_largura and self.contador_cenarios == 3:
+                self.contador_cenarios = 1
 
-            if self.contador_cenarios == 1:
-                if self.ivo.rect_x >= config.alea_x - 50 and self.ivo.rect_x <= config.alea_x + 50:
+            if self.contador_cenarios == 3:
+                if config.background_largura >= 600 and config.bg_x2 <= 700:
                     font = pygame.font.Font(None, 36)
                     pressione_up = font.render("Press UP to maker", True, (255, 255, 255))
                     config.screen.blit(pressione_up, (200, 200))
@@ -82,7 +110,7 @@ class Cenarios:
                 self.todas_as_sprites.draw(config.screen)
                 self.todas_as_sprites.update() 
 
-            elif self.contador_cenarios == 3:
+            elif self.contador_cenarios == 1:
                 if config.background_largura >= 600 and config.bg_x2 <= 700:
                     font = pygame.font.Font(None, 36)
                     pressione_up = font.render("Press UP to Class Room", True, (255, 255, 255))
@@ -100,37 +128,87 @@ class Cenarios:
 
 
         elif self.parametro_tela == "maker":
-            config.screen.blit(config.maker, (config.bg_x1, 0))
+            config.screen.blit(config.maker, (0, 0))
+            self.marlon.marlon()
+            self.todas_as_sprites.draw(config.screen)
+            self.todas_as_sprites.update()
+            font = pygame.font.Font(None, 20)
+            text_surface = font.render("Aperte ENTER para ver o diálogo", True, (0, 0, 0))
+            config.screen.blit(text_surface, (100, 120))
             self.keys = pygame.key.get_pressed()
+            if self.keys[pygame.K_RETURN]:
+                self.parametro_tela = "dialogo_marlon"
             if self.keys[pygame.K_DOWN]:
                 desvanecer_tela()
                 self.parametro_tela = "principal"
 
-    
+        elif self.parametro_tela == "dialogo_marlon":
+            superficie = pygame.Surface((600, 400))
+            superficie.fill((0, 0, 0))
+            escrever_texto(textos.texto_maker, 0, 0, 600, 400)
+            self.keys = pygame.key.get_pressed()
+            if self.keys[pygame.K_LEFT]:
+                desvanecer_tela()
+                self.parametro_tela = "maker"
 
-            self.todas_as_sprites.draw(config.screen)
-            self.todas_as_sprites.update() 
+
+             
 
         elif self.parametro_tela == "dacal":
             config.screen.blit(config.dacal, (0, 0))
+            font = pygame.font.Font(None, 20)
+            text_surface = font.render("Aperte ENTER para ver o diálogo", True, (0, 0, 0))
+            config.screen.blit(text_surface, (100, 120))
             self.keys = pygame.key.get_pressed()
+            if self.keys[pygame.K_RETURN]:
+                self.parametro_tela = "dialogo_dacal"
             if self.keys[pygame.K_DOWN]:
                 desvanecer_tela()
                 self.parametro_tela = "principal"
 
             self.todas_as_sprites.draw(config.screen)
             self.todas_as_sprites.update()
+
+        elif self.parametro_tela == "dialogo_dacal":
+            superficie = pygame.Surface((600, 400))
+            superficie.fill((0, 0, 0))
+            escrever_texto(textos.texto_dacal, 0, 0, 600, 400)
+            self.keys = pygame.key.get_pressed()
+            if self.keys[pygame.K_LEFT]:
+                desvanecer_tela()
+                self.parametro_tela = "dacal"
+            
 
         elif self.parametro_tela == "class":
             config.screen.blit(config.sala, (0, 0))
             self.keys = pygame.key.get_pressed()
+            self.todas_as_sprites.draw(config.screen)
+            self.todas_as_sprites.update()
+            font = pygame.font.Font(None, 20)
+            text_surface = font.render("Aperte ENTER para ver o diálogo", True, (0, 0, 0))
+            config.screen.blit(text_surface, (100, 120))
+            if self.keys[pygame.K_RETURN]:
+                self.parametro_tela = "dialogo_sala_aula"
             if self.keys[pygame.K_DOWN]:
                 desvanecer_tela()
                 self.parametro_tela = "principal"
 
-            self.todas_as_sprites.draw(config.screen)
-            self.todas_as_sprites.update()
+        elif self.parametro_tela == "dialogo_sala_aula":
+            superficie = pygame.Surface((600, 400))
+            superficie.fill((0, 0, 0))
+            escrever_texto(textos.texto_sala_aula, 0, 0, 600, 400)
+            self.keys = pygame.key.get_pressed()
+            if self.keys[pygame.K_LEFT]:
+                desvanecer_tela()
+                self.parametro_tela = "class"
             
+
+class Marlon():
+    def marlon(self):
+        config.screen.blit(config.marlon, (300, 300))
+
+
+
 
 
 
@@ -175,23 +253,22 @@ class Ivo(pygame.sprite.Sprite):
                 self.rect.topleft = self.rect_x, self.rect_y
             config.bg_x1 -= 2
             config.bg_x2 -= 2
-            config.alea_x -= 2
             config.background_largura -= 2
             if config.background_largura <= 0:
                 config.background_largura = 700
             self.image = self.sprites_direita[int(self.atual)]
-        elif self.keys[pygame.K_LEFT]:
-            self.atual += 0.1
-            if self.atual >= len(self.sprites_direita):
-                self.atual = 0
-                self.rect.topleft = self.rect_x, self.rect_y
-            config.bg_x1 += 2
-            config.bg_x2 += 2
-            config.alea_x += 2
-            config.background_largura += 2
-            if config.background_largura > 700:
-                config.background_largura = 0
-            self.image = self.sprites_esquerda[int(self.atual)]
+        #elif self.keys[pygame.K_LEFT]:
+        #    self.atual += 0.1
+        #    if self.atual >= len(self.sprites_direita):
+        #        self.atual = 0
+        #        self.rect.topleft = self.rect_x, self.rect_y
+        #    config.bg_x1 += 2
+        #    config.bg_x2 += 2
+        #    config.alea_x += 2
+        #    config.background_largura += 2
+        #    if config.background_largura > 700:
+        #        config.background_largura = 0
+        #    self.image = self.sprites_esquerda[int(self.atual)]
 
 
 cenarios = Cenarios()

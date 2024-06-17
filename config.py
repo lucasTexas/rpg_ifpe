@@ -20,22 +20,22 @@ background_width = background.get_width()
 background_largura = background.get_width()
 background_height = background.get_height()
 
-maker = pygame.image.load("IFMAKER.png").convert()
+maker = pygame.image.load("maker.jpeg").convert()
 maker_width = maker.get_width()
 maker_height = maker.get_height()
 
-dacal = pygame.image.load("SALA_DE_DACAL.png").convert()
+dacal = pygame.image.load("sala_de_dacal.jpeg").convert()
 dacal_width = maker.get_width()
 dacal_height = maker.get_height()
 
-sala = pygame.image.load("SALA_DE_AULA.png").convert()
-sala_width = maker.get_width()
-sala_height = maker.get_height()
+sala = pygame.image.load("sala_de_aula.jpeg").convert()
+sala_width = sala.get_width()
+sala_height = sala.get_height()
 
-alea = pygame.image.load("imagem_aleatoria.jpg").convert()
-alea_width = alea.get_width()
-alea_height = alea.get_height()
-alea_x = 100
+marlon = pygame.image.load("marlon_parado.png").convert()
+marlon_width = marlon.get_width()
+marlon_height = marlon.get_height()
+
 
 
 
